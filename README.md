@@ -49,7 +49,7 @@ En la tarea habilitada en Moodle Centros, entrega un enlace al repositorio del p
 El repositorio debe contener:
 
 * El código fuente de la aplicación con las mejoras implementadas.
-*  Un archivo README.md que explique claramente las **[(funcionalidades nuevas o mejoradas)](https://github.com/JoseAntonioDiazBusati/proyecto-3-dwec/document)**
+*  Un archivo README.md que explique claramente las **[funcionalidades nuevas o mejoradas](https://github.com/JoseAntonioDiazBusati/proyecto-3-dwec/blob/main/document/README.md)**
    que has añadido, así como cualquier instrucción relevante para la revisión del proyecto. Puedes incluir capturas de pantalla o ejemplos si lo consideras necesario para mejorar la comprensión.
 #### Recomendaciones:
 
