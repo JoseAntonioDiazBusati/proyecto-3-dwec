@@ -104,56 +104,40 @@ function añadirCurso(e) {
         contenedorCarrito.firstChild.remove()
     }
  }
-// CONFIRMAR COMPRA
-document.addEventListener("DOMContentLoaded", () => {
-     const comprarBtn = document.getElementById("comprar-carrito");
-     const vaciarBtn = document.getElementById("vaciar-carrito");
-     const tbody = document.querySelector("#lista-carrito tbody");
 
-     if (comprarBtn) {
-         comprarBtn.addEventListener("click", (e) => {
-             e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeToggle = document.getElementById('toggle-dark-mode');
+    const body = document.body;
 
-             const items = tbody.querySelectorAll("tr");
+    // Aplicar tema guardado al cargar
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.checked = true;
+    }
 
-             if (items.length === 0) {
-                 alert("El carrito está vacío. Añade productos antes de comprar.");
-                 return;
-             }
+    // Cambiar tema al activar/desactivar el toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
 
-             const confirmar = confirm("¿Deseas confirmar la compra?");
-             if (!confirmar) return;
 
-             alert("🎉 ¡Compra realizada con éxito!");
-
-             // Usamos tu botón existente para limpiar el carrito
-             vaciarBtn.click();
-         });
-     }
- });
-
-//MODO OSCURO
-document.addEventListener("DOMContentLoaded", () => {
-     const root = document.documentElement;
-     const toggleBtn = document.getElementById("toggle-theme");
-
-     if (toggleBtn) {
-         const savedTheme = localStorage.getItem("theme");
-
-         // Cargar tema guardado
-         if (savedTheme === "dark") {
-             root.classList.add("dark");
-             toggleBtn.textContent = "☀️";
-         } else {
-             toggleBtn.textContent = "🌙";
-         }
-
-         // Alternar tema
-         toggleBtn.addEventListener("click", () => {
-             const isDark = root.classList.toggle("dark");
-             localStorage.setItem("theme", isDark ? "dark" : "light");
-             toggleBtn.textContent = isDark ? "☀️" : "🌙";
-         });
-     }
- });
-
+const confirmarBtn = document.getElementById('btn-confirmar-compra');
+if (confirmarBtn) {
+    confirmarBtn.addEventListener('click', () => {
+        if (confirm('¿Seguro que quieres confirmar la compra?')) {
+            localStorage.removeItem('carrito');
+            if (typeof renderCarrito === 'function') renderCarrito([]);
+            alert('¡Compra confirmada!');
+        }
+    });
+}
+});
